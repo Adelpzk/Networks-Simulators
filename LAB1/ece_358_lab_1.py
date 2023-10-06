@@ -41,7 +41,7 @@ for i in range(1000):
 computed_mean = statistics.mean(exp_rand_vars)
 computed_variance = statistics.variance(exp_rand_vars)
 print("Computed mean of 1000 generated exponential random variables with lambda = 75: ", computed_mean)
-print("Computed variance of 1000 generated exponential random variables with lambda = 75: ",  computed_variance)
+print("Computed variance of 1000 generated exponential random variables with lambda = 75: ",  computed_variance, "\n")
 
 
 
@@ -142,7 +142,6 @@ def mm1_simulation(T, L, C, r):
     of time the server is idle (p_idle). Since the queue is infinite, the probability
     of losing packets is 0%.
     """
-    print("Question 3: ")
     events.sort(key=lambda x:x[0]) # Sorts events by time in ascending order
 
     num_arrivals = 0
@@ -207,7 +206,7 @@ def mm1k_simulation(T, L, C, r, K):
     Returns the average number of packets in the queue (e_n), the proportion
     of time the server is idle (p_idle) and the packet loss probability (p_loss).
     """
-    print("Question 6: ")
+    
     events.sort(key=lambda x:x[0]) # Sorts events by time in ascending order
 
     num_arrivals = 0
@@ -275,6 +274,7 @@ def mm1k_simulation(T, L, C, r, K):
 
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 
 def plot_mm1_simulations(L, T, C, rho_values):
   """
@@ -308,8 +308,16 @@ def plot_mm1_simulations(L, T, C, rho_values):
   ax2.set_xlabel('Traffic intensity')
   ax2.set_ylabel('Propotion of Idle')
 
-  fig1.savefig('Plots_Question3/Question 3_1.png')
-  fig2.savefig('Plots_Question3/Question 3_2.png')
+  folder_name = "Plots_Question3"  
+  if not os.path.exists(folder_name):
+    os.makedirs(folder_name)
+
+  file_name = "Question 3_1.png"  
+  file_path = os.path.join(folder_name, file_name)
+  fig1.savefig(file_path)
+  file_name = "Question 3_2.png"  
+  file_path = os.path.join(folder_name, file_name)
+  fig2.savefig(file_path)
   plt.close(fig1)
   plt.close(fig2)
 
@@ -379,17 +387,27 @@ def plot_mm1k_simulations(T, L, C, rho_values, K):
   en_ax.legend()
   idle_ax.legend()
   loss_ax.legend()
+  
+  folder_name = "Plots_Question6"  
+  if not os.path.exists(folder_name):
+    os.makedirs(folder_name)
 
-  en_fig.savefig('Plots_Question6/Question 6_1.png')
-  pidle_fig.savefig('Plots_Question6/idle.png')
-  ploss_fig.savefig('Plots_Question6/Question 6_2.png')
+  file_name = "Question 6_1.png"  
+  file_path = os.path.join(folder_name, file_name)
+  en_fig.savefig(file_path)
+  file_name = "idle.png"  
+  file_path = os.path.join(folder_name, file_name)
+  pidle_fig.savefig(file_path)
+  file_name = "Question 6_2.png"  
+  file_path = os.path.join(folder_name, file_name)
+  ploss_fig.savefig(file_path)
   plt.close(en_fig)
   plt.close(pidle_fig)
   plt.close(ploss_fig)
 
 
 #########################################################################
-############ Finding the Optimal Simulatio time for MM! #################
+############ Finding the Optimal Simulatio time for MM1 #################
 #########################################################################
 
 T1 = 1000
@@ -424,7 +442,7 @@ print("Simulation Time ", T2)
 print("Average E[N]: ", en_values/6)
 print("Average P_idle: ", p_idle_values/6, "\n")
 
-print("Since The Average E[N] and P_idle of Simulation with 1000 and 2000 seconds is within 5% \n we chose 2000 as T")
+print("Since The Average E[N] and P_idle of Simulation with 1000 and 2000 seconds is within 5% \n we chose 2000 as T \n")
 
 
 T = 2000
@@ -432,10 +450,13 @@ L = 2000
 C = 1000000
 
 # Question 3
+print("Question 3: \n")
 plot_mm1_simulations(T, L, C, np.arange(0.35, 0.95, 0.1))
 
 # # Question 4
+print("Question 4: \n")
 mm1_simulation(T, L, C, 1.2)
 
 # Question 6
+print("Question 6: \n")
 plot_mm1k_simulations(T, L, C, np.arange(0.5, 1.6, 0.1), [10,25,50])
