@@ -12,6 +12,8 @@ Authors: Adel Pazoki and Larissa Troper
 import math
 import random
 import statistics
+import matplotlib
+matplotlib.use('Agg')
 
 def generate_random_exp_variable(lambda_value):
   """
