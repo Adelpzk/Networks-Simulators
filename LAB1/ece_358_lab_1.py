@@ -395,7 +395,7 @@ def plot_mm1k_simulations(T, L, C, rho_values, K):
 
 
 #########################################################################
-############ Finding the Optimal Simulation time for MM1 ################
+################# Testing Simulation times for MM1 ######################
 #########################################################################
 print("Finding stable simulation time for MM1: \n")
 T1 = 1000
@@ -427,6 +427,10 @@ print("Simulation Time ", T2)
 print("Average E[N]: ", en_values2/6)
 print("Average P_idle: ", p_idle_values2/6, "\n")
 
+#########################################################################
+#########################################################################
+#########################################################################
+
 
 T = 2000
 L = 2000
@@ -439,6 +443,50 @@ plot_mm1_simulations(T, L, C, np.arange(0.35, 0.95, 0.1))
 # # Question 4
 print("Question 4: \n")
 mm1_simulation(T, L, C, 1.2)
+
+
+#########################################################################
+############ Testing Simulation times for MM1K ##########################
+#########################################################################
+# print("Finding stable simulation time for MM1K at K = 50: \n")
+# T1 = 1000
+# K = 50
+# rho = np.arange(0.5, 1.6, 0.1)
+# en_values = 0
+# p_idle_values = 0
+# p_loss_values = 0
+
+# for r in rho:
+#   en_value, p_idle_value, p_loss_value = mm1k_simulation(T1, L, C, r, K)
+#   en_values += en_value
+#   p_idle_values += p_idle_value
+#   p_loss_values += p_loss_value
+
+# T2 = 2000
+# en_values2 = 0
+# p_idle_values2 = 0
+# p_loss_values2 = 0
+
+# for r in rho:
+#   en_value, p_idle_value, p_loss_value = mm1k_simulation(T2, L, C, r, K)
+#   en_values2 += en_value
+#   p_idle_values2 += p_idle_value
+#   p_loss_values2 += p_loss_value
+
+
+# print("\nSimulation Time ", T1)
+# print("Average E[N]: ", en_values/6)
+# print("Average P_idle: ", p_idle_values/6, "\n")
+# print("Average P_loss: ", p_loss_values/6, "\n")
+
+# print("Simulation Time ", T2)
+# print("Average E[N]: ", en_values2/6)
+# print("Average P_idle: ", p_idle_values2/6, "\n")
+# print("Average P_loss: ", p_loss_values2/6, "\n")
+
+#########################################################################
+#########################################################################
+#########################################################################
 
 # Question 6
 print("Question 6: \n")
