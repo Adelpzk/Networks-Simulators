@@ -12,8 +12,6 @@ Authors: Adel Pazoki and Larissa Troper
 import math
 import random
 import statistics
-import matplotlib
-matplotlib.use('Agg')
 
 def generate_random_exp_variable(lambda_value):
   """
@@ -298,6 +296,8 @@ def plot_mm1_simulations(L, T, C, rho_values):
   ax2.set_xlabel('Traffic intensity')
   ax2.set_ylabel('Propotion of Idle')
 
+  plt.show()
+
   folder_name = "Plots_Question3"  
   if not os.path.exists(folder_name):
     os.makedirs(folder_name)
@@ -377,6 +377,8 @@ def plot_mm1k_simulations(T, L, C, rho_values, K):
   en_ax.legend()
   idle_ax.legend()
   loss_ax.legend()
+
+  plt.show()
   
   folder_name = "Plots_Question6"  
   if not os.path.exists(folder_name):
