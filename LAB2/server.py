@@ -32,7 +32,7 @@ def parse_query(data):
 #make the response to be sent back to the client
 def create_response(transaction_id, domain_name):
     if domain_name in DNS_RECORDS:
-        flags = 0x8400  
+        flags = 0x8400 & 0xFF7F
         qdcount = 1
         ancount = len(DNS_RECORDS[domain_name])
         nscount = 0
@@ -62,9 +62,13 @@ def run_server():
     try:
         while True:
             data, addr = server_socket.recvfrom(512)
+            if(data == b''):
+                print('Invalid Domain Name Entered by User')
+                continue
             print("Request:")
             print_hex(data)
             transaction_id, domain_name = parse_query(data)
+            print(domain_name)
             response = create_response(transaction_id, domain_name)
             print("Response:")
             print_hex(response)
