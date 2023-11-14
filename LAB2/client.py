@@ -3,12 +3,20 @@ import socket
 import struct
 import sys
 
+DNS_RECORDS = {
+    'google.com': [('192.165.1.1', 260), ('192.165.1.10', 260)],
+    'youtube.com': [('192.165.1.10', 160)],
+    'uwaterloo.ca': [('192.165.1.3', 160)],
+    'wikipedia.org': [('192.165.1.4', 160)],
+    'amazon.ca': [('192.165.1.5', 160)]
+}
+
 def create_dns_query(domain):
-    # Generate a random ID for the query
+    # Generates a random ID for the query
     transaction_id = random.randint(0, 255)
 
     flags = 0
-
+    
     # Set AA (bit 10)
     flags |= (1 << 10)
    
@@ -37,15 +45,21 @@ def print_hex(data):
 def main():
     while (1):
         domain = input("Enter Domain Name: ")
-    
+        
+        
         if domain.lower() == 'end':
             print('Session ended')
             return
-    
-        query = create_dns_query(domain)
-    
+        
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         server_address = ('127.0.0.1', 10500)
+        if (domain not in DNS_RECORDS):
+            print('Invalid Domain Name')
+            sock.sendto(b'', server_address)
+            continue
+    
+        query = create_dns_query(domain)
+        
         sock.sendto(query, server_address)
 
         response, _ = sock.recvfrom(512) 
