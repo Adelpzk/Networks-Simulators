@@ -68,7 +68,6 @@ def run_server():
             print("Request:")
             print_hex(data)
             transaction_id, domain_name = parse_query(data)
-            print(domain_name)
             response = create_response(transaction_id, domain_name)
             print("Response:")
             print_hex(response)
